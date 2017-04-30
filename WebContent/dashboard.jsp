@@ -10,6 +10,87 @@
 <meta name="description" content="Dashboard Page">
 <meta name="author" content="yashx1@gmail.com">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	
+<script type="text/javascript">
+
+	var cityMap = {};
+		
+	cityMap["NCR"] = ["Delhi" , "Ghaziabad", "Gurgaon", "Noida"];
+	cityMap["KA"] = ["Bangalore", "Mysore"];
+	cityMap["MA"] =  ["Mumbai", "Pune", "Nasik"];
+	
+	
+	$(function(){
+/* 		$('#stateDropdown li a').click(function() {
+			var html = "<ul class='dropdown-menu' aria-labelledby='dropdownMenu2' id='cityDropdown'>";
+			var arr = cityMap[$(this).attr("name")];
+					
+			for (i in arr) {
+			    html = html + "<li><a name='"+arr[i]+"' href=# >"+arr[i]+"</a></li>";
+			}
+
+			html = html + "</ul>";
+			
+			$( "#cityDropdown" ).remove();		
+			$( "#dropdownMenu2" ).after(html);
+		});
+ */
+	
+ 
+	$('#stateDropdown li a').click(function() {
+		var html = "";
+		var arr = cityMap[$(this).attr("name")];
+				
+		for (i in arr) {
+		    html = html + "<li><a name='"+arr[i]+"' href=# >"+arr[i]+"</a></li>";
+		}
+
+		
+		$( "#cityDropdown" ).empty();		
+		$( "#cityDropdown" ).append(html);
+	});
+
+ 
+ 
+ 
+		$('#cityDropdown').on('click', 'li', function () {
+			
+			var city = $(this).text();
+			
+			$.ajax({
+	            url : "BDHandler",
+	            data: "city="+city,
+	            dataType : 'json',
+	            error : function() {
+	                console.log(city);
+	            },
+	            success : function(data) {
+	                var receivedData = [];
+
+	                $.each(data.jsonArray, function(index) {
+	                    $.each(data.jsonArray[index], function(key, value) {
+	                        var point = [];
+
+	                            point.push(key);
+	                            point.push(value);
+	                            receivedData.push(point);
+
+	                        }); 
+	                });
+
+	            }
+	        });
+		});
+		
+	});
+	
+
+
+	
+</script>
+
+
 <title>Dashboard</title>
 
 <!-- Bootstrap core CSS -->
@@ -82,40 +163,34 @@
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h1 class="page-header">Dashboard</h1>
-
 				<div class="row placeholders">
-					<div class="col-xs-6 col-sm-3 placeholder">
-						<img
-							src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-							width="200" height="200" class="img-responsive"
-							alt="Generic placeholder thumbnail">
-						<h4>Label</h4>
-						<span class="text-muted">Something else</span>
+					<div class="col-xs-6 col-sm-3 placeholder dropdown">
+						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    State
+						    <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="stateDropdown">
+						    <li><a name="NCR" href="#" >NCR</a></li>
+						    <li><a name="KA" href="#">Karnataka</a></li>
+						    <li><a name="MA" href="#">Maharashtra</a></li>
+						  </ul>
 					</div>
-					<div class="col-xs-6 col-sm-3 placeholder">
-						<img
-							src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-							width="200" height="200" class="img-responsive"
-							alt="Generic placeholder thumbnail">
-						<h4>Label</h4>
-						<span class="text-muted">Something else</span>
+					<div class="col-xs-6 col-sm-3 placeholder dropdown"></div>
+
+
+					<div class="col-xs-6 col-sm-3 placeholder dropdown">
+						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" 
+						  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    City
+						    <span class="caret"></span>
+						  </button>
+						  
+						  <ul class='dropdown-menu' aria-labelledby='dropdownMenu2' id='cityDropdown'></ul>
+
 					</div>
-					<div class="col-xs-6 col-sm-3 placeholder">
-						<img
-							src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-							width="200" height="200" class="img-responsive"
-							alt="Generic placeholder thumbnail">
-						<h4>Label</h4>
-						<span class="text-muted">Something else</span>
-					</div>
-					<div class="col-xs-6 col-sm-3 placeholder">
-						<img
-							src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-							width="200" height="200" class="img-responsive"
-							alt="Generic placeholder thumbnail">
-						<h4>Label</h4>
-						<span class="text-muted">Something else</span>
-					</div>
+
+
+
 				</div>
 
 				<h2 class="sub-header">Section title</h2>
@@ -249,17 +324,7 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="./resources/js/vendor/jquery.min.js"><\/script>')
-	</script>
+	
 	<script src="./resources/js/bootstrap.min.js"></script>
 	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 	<script src="./resources/js/holder.min.js"></script>
