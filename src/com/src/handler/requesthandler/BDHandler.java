@@ -2,6 +2,7 @@ package com.src.handler.requesthandler;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,8 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.src.entity.BusinessDevelopers;
 import com.src.handler.dbhandler.DBUtil;
+
 
 /**
  * Servlet implementation class BDHandler
@@ -38,27 +44,26 @@ public class BDHandler extends HttpServlet {
 		
 		List<BusinessDevelopers> listOfBDs = dbUtil.getBDsCitywise(city);
 		
-		System.out.println(listOfBDs.get(0).getEmail());
-
 		
-//		int [] sampleData = null;
-//        //sampleData= here you can get data from database
-//
-//        //writing data to json
-//        response.setContentType("application/json;charset=utf-8");
-//
+		
+        //writing data to json
+        response.setContentType("application/json;charset=utf-8");
+
+        JSONArray jsonArr = new JSONArray(Arrays.asList(listOfBDs));
+        
+                
 //        JSONObject json = new JSONObject();
 //        JSONArray array = new JSONArray();
 //        JSONObject member =  new JSONObject();
 //
-//        member.put("arrayData", sampleData);
+//        member.put("arrayData", listOfBDs);
 //        array.add(member);
 //
 //        json.put("jsonArray", array);
-//
-//        PrintWriter pw = response.getWriter(); 
-//        pw.print(json.toString());
-//        pw.close();
+
+        PrintWriter pw = response.getWriter(); 
+        pw.print(jsonArr.toString());
+        pw.close();
 	}
 
 	/**

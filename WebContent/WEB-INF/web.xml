@@ -4,4 +4,33 @@
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
+
+		<servlet>
+		    <servlet-name>dashboardPage</servlet-name>
+		    <jsp-file>/dashboard.jsp</jsp-file>
+		</servlet>
+		<servlet-mapping>
+		    <servlet-name>dashboardPage</servlet-name>
+		    <url-pattern>/dashboard</url-pattern>
+		</servlet-mapping>
+  
+  
+		<servlet>
+		    <servlet-name>bdDetailsPage</servlet-name>
+		    <jsp-file>/bdDetails.jsp</jsp-file>
+		</servlet>
+		<servlet-mapping>
+		    <servlet-name>bdDetailsPage</servlet-name>
+		    <url-pattern>/bddetails</url-pattern>
+		</servlet-mapping>
+
+		<servlet>
+		    <servlet-name>resourcesPage</servlet-name>
+		    <jsp-file>/resources.jsp</jsp-file>
+		</servlet>
+		<servlet-mapping>
+		    <servlet-name>resourcesPage</servlet-name>
+		    <url-pattern>/resources</url-pattern>
+		</servlet-mapping>
+  
 </web-app>

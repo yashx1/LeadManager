@@ -24,7 +24,7 @@ public class DBUtil {
 			pstm.setString(1, city);
 			ResultSet rs = pstm.executeQuery();
 
-			if (rs.next()) {
+			while (rs.next()) {
 				BusinessDevelopers bd = new BusinessDevelopers();
 
 				bd.setIdBD(rs.getInt("idBD"));
