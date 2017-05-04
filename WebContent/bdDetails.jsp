@@ -11,6 +11,11 @@
 <meta name="author" content="yashx1@gmail.com">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="./resources/js/bootstrap.min.js"></script>
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script src="./resources/js/holder.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="./resources/js/ie10-viewport-bug-workaround.js"></script>
 	
 <script type="text/javascript">
 
@@ -48,7 +53,7 @@
 		            success : function(data) {
 		            	$("#bdTable").empty();
 		            	
-		            	html = "<thead><tr><th>#</th><th>Name</th><th>Phone No.</th><th>Email</th><th>Address</th><th>Status</th></tr></thead><tbody>"
+		            	html = "<thead><tr><th>#</th><th>Name</th><th>Phone No.</th><th>Email</th><th>Address</th><th>Effort Update</th><th>Status</th></tr></thead><tbody>"
 		            	
 		            	jQuery.each( data[0], function( i, obj ) {
 		            		var k = i+1;
@@ -56,25 +61,61 @@
 		            		html =html + "<tr><td>"+k+"</td><td>"+obj['name']+"</td><td>"+obj['contact']+"</td><td>"+obj['email']+"</td><td>"+obj['address']+"</td>";
 							
 		            		if(obj['active'] == true){
-		            			html = html + "<td><span class='label label-success'>active</span></td>";
+		            			html = html + "<td><button type='button' class='trackerBtn btn btn-link btn-xs' id='"+obj['idBD']+"' onclick='showTracker(this.id)'>Effort Update</button></td><td><span class='label label-success'>active</span></td>";
 		            		}else{
-		            			html = html + "<td><span class='label label-danger'>inactive</span></td>";
+		            			html = html + "<td><button type='button' class='btn btn-link btn-xs' disabled>Effort Update</button></td><td><span class='label label-danger'>inactive</span></td>";
 		            		}	            		
 		            		
 		            		html = html + '</tr>';
 		            	});                	
 		            	
-		            	$("#bdTable").append(html);
+		            	$("#bdTable").append("</tbody>"+html);
 		            }
 		        });
-		});	
+		});			
 	});
 
+	function showTracker(bdId){
+		
+		
+		$.ajax({
+            url : "BDTracker",
+            data: "bdId="+bdId,
+            dataType : 'json',
+            error : function() {
+                alert("Something went wrong.");
+            },
+            success : function(data) {
+            	$("#updateTable").empty();
+            	            	
+            	html = "<thead><tr><th>#</th><th>Update</th></thead><tbody>"
+            	
+            	jQuery.each( data[0], function( i, obj ) {
+            		var k = i+1;           		
+            		html =html + "<tr><td>"+k+"</td><td>"+obj['update']+"</td>";
+					
+            		
+            		html = html + '</tr>';
+            	});                	
+
+            	$("#updateTable").append("</tbody>"+html);
+            	
+        		$("#bdTrackerModal").modal("show");
+
+            }
+        });
+		
+		
+		
+	}
+	
+	
+	
 </script>
 
 
 
-<title>Dashboard</title>
+<title>BD Details</title>
 
 <!-- Bootstrap core CSS -->
 <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
@@ -93,6 +134,30 @@
 </head>
 
 <body>
+
+	<!-- Modal -->
+	<div class="modal fade" id="bdTrackerModal" tabindex="-1" role="dialog" aria-labelledby="bdTrackerModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	        	<span aria-hidden="true">&times;</span></button>
+	       		<h4 class="modal-title" id="bdTrackerModalLabel">BD Update Tracker</h4>
+	      </div>
+	      <div class="modal-body">
+ 		  		<div class="table-responsive">
+					<table class="table table-striped" id="updateTable"></table>
+				</div>
+   	
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+
 
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
@@ -127,7 +192,7 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="row">
 					<h1 class="page-header">BD Details</h1>
-				  	<button type="button" class="btn btn-primary btn-xs" style="float: right;">+ Add New BD</button>
+				  	<button type="button" class="btn btn-primary btn-xs" style="float: right;" onclick="addNewBD()">+ Add New BD</button>
 				</div>
 								
 				<div class="row placeholders">
@@ -143,34 +208,19 @@
 						  </ul>
 					</div>
 					<div class="col-xs-6 col-sm-3 placeholder dropdown"></div>
-
-
 					<div class="col-xs-6 col-sm-3 placeholder dropdown">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" 
-						  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						    City
-						    <span class="caret"></span>
+						  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">City<span class="caret"></span>
 						  </button>
-						  
 						  <ul class='dropdown-menu' aria-labelledby='dropdownMenu2' id='cityDropdown'></ul>
-
 					</div>
-
-
-
 				</div>
-			
 				<div class="table-responsive">
 					<table class="table table-striped" id="bdTable"></table>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	<script src="./resources/js/bootstrap.min.js"></script>
-	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-	<script src="./resources/js/holder.min.js"></script>
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="./resources/js/ie10-viewport-bug-workaround.js"></script>
+		
 </body>
 </html>

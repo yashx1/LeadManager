@@ -38,7 +38,7 @@ public class BDHandler extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String city = request.getParameter("city");
+		String city = request.getParameter("city").toLowerCase();
 		
 		DBUtil dbUtil = new DBUtil();
 		
@@ -51,16 +51,6 @@ public class BDHandler extends HttpServlet {
 
         JSONArray jsonArr = new JSONArray(Arrays.asList(listOfBDs));
         
-                
-//        JSONObject json = new JSONObject();
-//        JSONArray array = new JSONArray();
-//        JSONObject member =  new JSONObject();
-//
-//        member.put("arrayData", listOfBDs);
-//        array.add(member);
-//
-//        json.put("jsonArray", array);
-
         PrintWriter pw = response.getWriter(); 
         pw.print(jsonArr.toString());
         pw.close();
@@ -73,4 +63,6 @@ public class BDHandler extends HttpServlet {
 		// TODO Auto-generated method stub
 	}
 
+	
+	
 }

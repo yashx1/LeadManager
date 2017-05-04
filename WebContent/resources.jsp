@@ -68,20 +68,24 @@
 				<h1 class="page-header">Resources</h1>
 				<div class="row placeholders">
 				<br>
-				<div class="col-xs-6 col-sm-6 placeholder dropdown">
-					<h4 class="page-header">Presentations</h4>
+					<div class="col-xs-6 col-sm-6 placeholder dropdown">
+						<h4 class="page-header">Presentations</h4>
+						<br>
+						<div><a href="./resources/docs/HR_PPT.ppt" target="_blank">PPT</a></div>
+						<br>
+						<div><a href="./resources/docs/HR_PPT.ppt" target="_blank">HR PPT</a></div>
+						<br>
+						<div><a href="./resources/docs/HR_PPT.ppt" target="_blank">NASSCOM PPT</a></div>
+					</div>
+					<div class="col-xs-6 col-sm-6 placeholder dropdown">
+						<h4 class="page-header">Business Decks</h4>
+						<br>
+						<div><a href="./resources/docs/Analyst_Briefings.pdf" target="_blank">Analyst Briefings</a></div>
+						<br>
+						<div><a href="./resources/docs/annual_review.pdf" target="_blank">Annual Review</a></div>
+						<br>
+					</div>
 				</div>
-				<div class="col-xs-6 col-sm-6 placeholder dropdown">
-					<h4 class="page-header">Business Decks</h4>
-				</div>
-				
-
-
-
-
-				</div>
-
-			
 			</div>
 		</div>
 	</div>
