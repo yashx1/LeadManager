@@ -41,7 +41,7 @@ CREATE TABLE `bd` (
 
 LOCK TABLES `bd` WRITE;
 /*!40000 ALTER TABLE `bd` DISABLE KEYS */;
-INSERT INTO `bd` VALUES (341,'harry','9428323292','harry@proptiger.com','varli','mumbai','maharashtra',''),(342,'harmoine','8828323292','harmoine@proptiger.com','vakad','mumbai','maharashtra',''),(343,'ron','9828324212','ron@proptiger.com','borivili','mumbai','maharashtra',''),(344,'malfoy','8088373271','malfoy@proptiger.com','thane','mumbai','maharashtra','\0'),(345,'dumbledore','8328313891','dumbledore@proptiger.com','hadapsar','pune','maharashtra','\0');
+INSERT INTO `bd` VALUES (341,'harry','9428323292','harry@dummy.com','varli','mumbai','maharashtra',''),(342,'harmoine','8828323292','harmoine@dummy.com','vakad','mumbai','maharashtra',''),(343,'ron','9828324212','ron@dummy.com','borivili','mumbai','maharashtra',''),(344,'malfoy','8088373271','malfoy@dummy.com','thane','mumbai','maharashtra','\0'),(345,'dumbledore','8328313891','dumbledore@dummy.com','hadapsar','pune','maharashtra','\0');
 /*!40000 ALTER TABLE `bd` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
